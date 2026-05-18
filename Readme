@@ -1,0 +1,199 @@
+# PR Management Agent
+
+A lightweight AI-style Purchase Requisition (PR) Management system built using Python.
+
+This project demonstrates:
+- Intent-based routing
+- Tool calling architecture
+- PR listing with pagination
+- PR cart management
+- LangChain-style agent prompting
+
+---
+
+# Features
+
+- Show active PRs
+- Paginate PR results
+- Add PRs to cart
+- Update PR cart quantity
+- Simple supervisor routing system
+- LangChain agent prompt integration
+
+---
+
+# Project Structure
+
+```bash
+.
+├── app.py
+├── orchestrator.py
+├── pr_management_tools.py
+└── agents/
+    └── pr_management_agent.py
+```
+
+---
+
+# How It Works
+
+## 1. Supervisor Router (`orchestrator.py`)
+
+The supervisor router analyzes user input and routes requests to the correct tool.
+
+Supported intents:
+
+| User Intent | Tool Called |
+|---|---|
+| Show PRs | `get_pr_list_tool()` |
+| View More PRs | `paginate_pr_tool()` |
+| Add PR to Cart | `add_pr_to_cart_tool()` |
+| Update Quantity | `update_pr_cart_qty_tool()` |
+
+---
+
+## 2. PR Tools (`pr_management_tools.py`)
+
+Contains:
+- Mock PR database
+- Pagination logic
+- Cart management
+- Quantity update logic
+
+### Available Tools
+
+```python
+get_pr_list_tool()
+paginate_pr_tool()
+add_pr_to_cart_tool(uuid, qty)
+update_pr_cart_qty_tool(uuid, qty)
+```
+
+---
+
+## 3. PR Management Agent (`pr_management_agent.py`)
+
+Defines the AI agent behavior using a LangChain prompt template.
+
+The agent:
+- Understands PR-related tasks
+- Restricts unsupported actions
+- Returns raw tool outputs
+
+---
+
+## 4. CLI App (`app.py`)
+
+Simple terminal-based interaction loop.
+
+Runs the supervisor router continuously until the user exits.
+
+---
+
+# Installation
+
+## Clone Repository
+
+```bash
+git clone <your-repo-url>
+cd <repo-name>
+```
+
+## Install Dependencies
+
+```bash
+pip install langchain-core
+```
+
+---
+
+# Run Application
+
+```bash
+python app.py
+```
+
+---
+
+# Example Usage
+
+## Show PRs
+
+```bash
+User: show my pr
+```
+
+---
+
+## View More PRs
+
+```bash
+User: next
+```
+
+---
+
+## Add PR to Cart
+
+```bash
+User: add pr 1a2b3c01-0001-4a0c-b0db-111111111111 qty 5
+```
+
+---
+
+## Update PR Quantity
+
+```bash
+User: update pr 1a2b3c01-0001-4a0c-b0db-111111111111 qty 10
+```
+
+---
+
+# Sample PR Object
+
+```python
+{
+    "uuid": "1a2b3c01-0001-4a0c-b0db-111111111111",
+    "pr_name": "LAPTOPS - VARIANT 1 - BLACK",
+    "qty": 60,
+    "location": "Pune"
+}
+```
+
+---
+
+# Current Limitations
+
+- In-memory storage only
+- No database integration
+- No authentication
+- Basic string parsing
+- No persistent sessions
+
+---
+
+# Future Improvements
+
+- LangGraph integration
+- FastAPI backend
+- Database support
+- Real LLM tool calling
+- Authentication & authorization
+- Frontend dashboard
+- Approval workflows
+
+---
+
+# Tech Stack
+
+- Python
+- LangChain Core
+- Prompt Engineering
+- Tool Calling Architecture
+
+---
+
+# Author
+
+Ritvik Marwah
+```
