@@ -1,28 +1,20 @@
+````markdown
 # PR Management Agent
 
-A lightweight AI-style Purchase Requisition (PR) Management system built using Python.
+A lightweight AI-style Purchase Requisition (PR) Management system built using Python and LangChain-style agent routing.
 
-This project demonstrates:
-- Intent-based routing
-- Tool calling architecture
-- PR listing with pagination
-- PR cart management
-- LangChain-style agent prompting
-
----
-
-# Features
+## Features
 
 - Show active PRs
-- Paginate PR results
+- Pagination support
 - Add PRs to cart
-- Update PR cart quantity
-- Simple supervisor routing system
-- LangChain agent prompt integration
+- Update PR quantities
+- Supervisor-based routing
+- Tool-calling architecture
 
 ---
 
-# Project Structure
+## Project Structure
 
 ```bash
 .
@@ -35,32 +27,81 @@ This project demonstrates:
 
 ---
 
-# How It Works
+## Installation
 
-## 1. Supervisor Router (`orchestrator.py`)
+### Clone Repository
 
-The supervisor router analyzes user input and routes requests to the correct tool.
+```bash
+git clone <your-repo-url>
+cd <repo-name>
+```
 
-Supported intents:
+### Install Dependencies
 
-| User Intent | Tool Called |
-|---|---|
-| Show PRs | `get_pr_list_tool()` |
-| View More PRs | `paginate_pr_tool()` |
-| Add PR to Cart | `add_pr_to_cart_tool()` |
-| Update Quantity | `update_pr_cart_qty_tool()` |
+```bash
+pip install langchain-core
+```
 
 ---
 
-## 2. PR Tools (`pr_management_tools.py`)
+## Run the Application
+
+```bash
+python app.py
+```
+
+---
+
+## Example Commands
+
+### Show Active PRs
+
+```bash
+show my pr
+```
+
+### View More PRs
+
+```bash
+next
+```
+
+### Add PR to Cart
+
+```bash
+add pr 1a2b3c01-0001-4a0c-b0db-111111111111 qty 5
+```
+
+### Update PR Quantity
+
+```bash
+update pr 1a2b3c01-0001-4a0c-b0db-111111111111 qty 10
+```
+
+---
+
+## Architecture
+
+### `orchestrator.py`
+
+Acts as the supervisor router.
+
+Responsible for:
+- Understanding user intent
+- Routing requests
+- Calling appropriate tools
+
+---
+
+### `pr_management_tools.py`
 
 Contains:
-- Mock PR database
+- PR data
 - Pagination logic
 - Cart management
 - Quantity update logic
 
-### Available Tools
+Available tools:
 
 ```python
 get_pr_list_tool()
@@ -71,85 +112,24 @@ update_pr_cart_qty_tool(uuid, qty)
 
 ---
 
-## 3. PR Management Agent (`pr_management_agent.py`)
+### `pr_management_agent.py`
 
-Defines the AI agent behavior using a LangChain prompt template.
+Defines the PR management agent prompt using LangChain.
 
 The agent:
-- Understands PR-related tasks
+- Understands PR-related requests
 - Restricts unsupported actions
 - Returns raw tool outputs
 
 ---
 
-## 4. CLI App (`app.py`)
+### `app.py`
 
-Simple terminal-based interaction loop.
-
-Runs the supervisor router continuously until the user exits.
+Simple CLI interface for interacting with the system.
 
 ---
 
-# Installation
-
-## Clone Repository
-
-```bash
-git clone <your-repo-url>
-cd <repo-name>
-```
-
-## Install Dependencies
-
-```bash
-pip install langchain-core
-```
-
----
-
-# Run Application
-
-```bash
-python app.py
-```
-
----
-
-# Example Usage
-
-## Show PRs
-
-```bash
-User: show my pr
-```
-
----
-
-## View More PRs
-
-```bash
-User: next
-```
-
----
-
-## Add PR to Cart
-
-```bash
-User: add pr 1a2b3c01-0001-4a0c-b0db-111111111111 qty 5
-```
-
----
-
-## Update PR Quantity
-
-```bash
-User: update pr 1a2b3c01-0001-4a0c-b0db-111111111111 qty 10
-```
-
----
-
-# Sample PR Object
+## Sample PR Object
 
 ```python
 {
@@ -162,29 +142,27 @@ User: update pr 1a2b3c01-0001-4a0c-b0db-111111111111 qty 10
 
 ---
 
-# Current Limitations
+## Current Limitations
 
 - In-memory storage only
-- No database integration
 - No authentication
-- Basic string parsing
 - No persistent sessions
+- Basic string parsing
 
 ---
 
-# Future Improvements
+## Future Improvements
 
 - LangGraph integration
 - FastAPI backend
 - Database support
 - Real LLM tool calling
-- Authentication & authorization
 - Frontend dashboard
 - Approval workflows
 
 ---
 
-# Tech Stack
+## Tech Stack
 
 - Python
 - LangChain Core
@@ -193,7 +171,7 @@ User: update pr 1a2b3c01-0001-4a0c-b0db-111111111111 qty 10
 
 ---
 
-# Author
+## Author
 
 Ritvik Marwah
-```
+````
